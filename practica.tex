@@ -24,7 +24,7 @@
 \newcommand{\showprog}[1]
 {
 \begin{minipage}{\textwidth}
-\lstinputlisting[language=C,
+\lstinputlisting[language=C++,
                   frame=single,
 		  backgroundcolor=\grisclaro,
 		  extendedchars=false,
@@ -36,8 +36,9 @@
 		  xleftmargin=1cm,
 		  xrightmargin=1cm,
 		  columns=flexible,
-		  commentstyle=\itshape\grisos,
-		  stringstyle=\color{red}]
+		  keywordstyle=\color{blue}\ttfamily,
+		stringstyle=\color{red}\ttfamily,
+		  commentstyle=\color{green}\ttfamily]
  {code/#1}
 \end{minipage} 
 }
@@ -99,7 +100,7 @@ La Ordenación de burbuja (Bubble Sort en inglés) es un sencillo algoritmo de o
 \begin{center}
 \includegraphics[width=1\textwidth]{graph/bubble-short-info}
 \end{center}
-\caption{Ejemplo de funcionamiento del algoritmo}
+\caption{Ejemplo de funcionamiento del algoritmo Bubble Short}
 \label{fig:BubbleSortInfo}
 \end{figure}
 
@@ -264,6 +265,102 @@ ${\displaystyle \Theta (i(n))= ?\;}$
 Por lo que no se puede determinar una cota ajustada asintótica del número de intercambios, dado que éste dependerá del orden del vector en cuestión.\\
 
 Facilmente se puede demostrar que tanto el rendimiento en el caso mas desfavorable como en el óptimo es el mismo ya que se ve obligado a recorrer todo el vector (aunque el orden de los intercambios será constante).
+
+\subsubsection{Ejemplo en C++}
+
+\showprog{bubbleSortCode.cpp}
+
+\newpage
+
+% ----------------------------------
+
+\subsection{Ordenamiento por selección}
+
+El ordenamiento por selección (Selection Sort en inglés) es un algoritmo de ordenamiento que requiere ${\displaystyle (n^{2})}$ operaciones para ordenar una lista de n elementos.
+
+\subsubsection{Descripción del algoritmo}
+Este algoritmo funciona de forma muy intuitiva, en esencia hace losiguiente:
+
+\begin{itemize}
+	\item Buscar el mínimo elemento de la lista
+    \item Intercambiarlo con el primero
+    \item Buscar el siguiente mínimo en el resto de la lista
+    \item Intercambiarlo con el segundo
+\end{itemize}
+Y en general:
+\begin{itemize}
+   \item  Buscar el mínimo elemento entre una posición i y el final de la lista
+    \item Intercambiar el mínimo con el elemento de la posición i
+\end{itemize}
+
+De esta manera se puede escribir el siguiente pseudocódigo para ordenar una lista de n elementos indexados desde el 1:
+\begin{quote}
+para i=0 hasta n-1\\
+    \tab mínimo = i;\\
+    \tab para j=i+1 hasta n\\
+        \tab \tab si lista[j] < lista[mínimo] entonces\\
+            \tab \tab \tab mínimo = j /* (!) */\\
+        \tab \tab fin si\\
+    \tab fin para\\
+    \tab intercambiar(lista[i], lista[mínimo])\\
+fin para\\
+\end{quote}
+
+Un ejemplo gráfico de este algoritmo se muestra en la figura \ref{fig:selectionSortInfo}.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=1\textwidth]{graph/selectionSortInfo}
+\end{center}
+\caption{Ejemplo de funcionamiento del algoritmo de selección}
+\label{fig:selectionSortInfo}
+\end{figure}
+
+\subsubsection{Análisis}
+ 
+Al algoritmo de ordenamiento por selección, para ordenar un vector de n términos, tiene que realizar siempre el mismo número de comparaciones:
+
+\begin{center}
+${\displaystyle c(n)={\frac {n^{2}-n}{2}}}$
+\end{center}
+
+Esto es, el número de comparaciones c(n) no depende del orden de los términos, si no del número de términos.
+
+\begin{center}
+    ${\displaystyle \Theta (c(n))=n^{2}\;}$
+\end{center}
+
+Por lo tanto la cota ajustada asintótica del número de comparaciones pertenece al orden de n cuadrado.
+
+El número de intercambios i(n), también es fijo, téngase en cuenta que la instrucción:
+
+\begin{center}
+    intercambiar(lista[i], lista[mínimo])
+\end{center}
+
+siempre se ejecuta, aun cuando i= mínimo, lo que da lugar:
+
+\begin{center}
+    ${\displaystyle i(n)=n\;}$
+\end{center}
+
+sea cual sea el vector, y el orden de sus términos, lo que implica en todos los casos un coste lineal:
+
+\begin{center}
+    ${\displaystyle \Theta (i(n))=n\;}$
+\end{center}
+
+la cota ajustada asintótica del número de intercambios es lineal, del orden de n.
+
+Asimismo, la fórmula que representa el rendimiento del algoritmo, viene dada por la función:
+
+\begin{center}
+    ${\displaystyle c(n)={\frac {n^{2}+n}{2}}}$
+\end{center}
+
+\newpage
+
+% ----------------------------------
 
 \subsection{Ordenamiento de }
 
