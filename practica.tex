@@ -40,7 +40,7 @@
 
 \newcommand { \bold }[1]{\textbf{#1}}
 
-\title{Práctica de TEII}
+\title{Análisis de Algoritmos de Ordenación}
 \author{Alberto Robles Enciso}
 \date{Febrero de 2018}
 
@@ -50,8 +50,7 @@
 \maketitle
 
 \begin{abstract}
-Este documento es una breve introducción al sistema \LaTeX.
-\\Intentamos ejercitasr las opciones más importantes.
+En este documento se va a analizar diversos algoritmos de ordenación para determinar cuál es mejor en cada tipo de problema.
 \end{abstract}
 
 
@@ -59,8 +58,31 @@ Este documento es una breve introducción al sistema \LaTeX.
 
 \newpage
 
-\section{Introduccion}
-Esto es una introducción para nuestro manual 
+\section{Introducción}
+En computación y matemáticas un algoritmo de ordenamiento es un algoritmo que pone elementos de una lista o un vector en una secuencia dada por una relación de orden, es decir, el resultado de salida ha de ser una permutación —o reordenamiento— de la entrada que satisfaga la relación de orden dada. Las relaciones de orden más usadas son el orden numérico y el orden lexicográfico. Ordenamientos eficientes son importantes para optimizar el uso de otros algoritmos (como los de búsqueda y fusión) que requieren listas ordenadas para una ejecución rápida. También es útil para poner datos en forma canónica y para generar resultados legibles por humanos.
+
+\section{Clasificación}
+Los algoritmos de ordenamiento se pueden clasificar en las siguientes maneras:
+
+\begin{itemize}
+	\item La más común es clasificar según el lugar donde se realice la ordenación
+	\begin{itemize}
+		\item Algoritmos de ordenamiento interno: en la memoria del ordenador.
+		\item Algoritmos de ordenamiento externo: en un lugar externo como un disco duro.
+	\end{itemize}
+	\item Por el tiempo que tardan en realizar la ordenación, dadas entradas ya ordenadas o inversamente ordenadas:
+	\begin{itemize}
+		\item Algoritmos de ordenación natural: Tarda lo mínimo posible cuando la entrada está ordenada.
+		\item Algoritmos de ordenación no natural: Tarda lo mínimo posible cuando la entrada está inversamente ordenada.
+	\end{itemize}
+	\item Por estabilidad: un ordenamiento estable mantiene el orden relativo que tenían originalmente los elementos con claves iguales. Por ejemplo, si una lista ordenada por fecha se reordena en orden alfabético con un algoritmo estable, todos los elementos cuya clave alfabética sea la misma quedarán en orden de fecha. Otro caso sería cuando no interesan las mayúsculas y minúsculas, pero se quiere que si una clave aBC estaba antes que AbC, en el resultado ambas claves aparezcan juntas y en el orden original: aBC, AbC. Cuando los elementos son indistinguibles (porque cada elemento se ordena por la clave completa) la estabilidad no interesa. Los algoritmos de ordenamiento que no son estables se pueden implementar para que sí lo sean. Una manera de hacer esto es modificar artificialmente la clave de ordenamiento de modo que la posición original en la lista participe del ordenamiento en caso de coincidencia.
+\end{itemize}
+
+Los algoritmos se distinguen por las siguientes características:
+\begin{itemize}
+	\item Complejidad computacional (peor caso, caso promedio y mejor caso) en términos de n, el tamaño de la lista o arreglo. Para esto se usa el concepto de orden de una función y se usa la notación $O(n)$. El mejor comportamiento para ordenar (si no se aprovecha la estructura de las claves) es $O(nlog n)$. Los algoritmos más simples son cuadráticos, es decir $O(n^2)$. Los algoritmos que aprovechan la estructura de las claves de ordenamiento (p. ej. bucket sort) pueden ordenar en $O(kn)$ donde k es el tamaño del espacio de claves. Como dicho tamaño es conocido a priori, se puede decir que estos algoritmos tienen un desempeño lineal, es decir $O(n)$.
+	\item Uso de memoria y otros recursos computacionales. También se usa la notación $O(n)$.
+\end{itemize}
 
 \section{Implementacion}
 
