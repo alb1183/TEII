@@ -1,0 +1,69 @@
+\documentclass[8pt, A4]{article}    %twocolumn
+
+\usepackage[utf8]{inputenc}
+\usepackage[normalem]{ulem}   % Para tachar
+\usepackage{verbatim}
+\usepackage{lipsum}
+\usepackage[spanish]{babel}
+\usepackage[hidelinks]{hyperref}
+\usepackage{color}
+\usepackage{kantlipsum}
+\usepackage{graphicx}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{import}
+\usepackage{listings}
+
+\newcommand{\grisclaro}{\color[gray]{0.99}}
+\newcommand{\gris}{\color[gray]{0.9}}
+\newcommand{\grisos}{\color[gray]{0.5}}
+
+\newcommand{\showprog}[1]
+{
+\begin{minipage}{\textwidth}
+\lstinputlisting[language=C,
+                  frame=single,
+		  backgroundcolor=\grisclaro,
+		  extendedchars=false,
+          inputencoding=utf8,
+		  aboveskip=1eM,
+		  belowskip=1.5eM,
+		  basicstyle=\small,
+		  title=-- #1 --,
+		  xleftmargin=1cm,
+		  xrightmargin=1cm,
+		  columns=flexible,
+		  commentstyle=\itshape\grisos,
+		  stringstyle=\color{red}]
+ {code/#1}
+\end{minipage} 
+}
+
+\newcommand { \bold }[1]{\textbf{#1}}
+
+\title{Práctica de TEII}
+\author{Alberto Robles Enciso}
+\date{Febrero de 2018}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Este documento es una breve introducción al sistema \LaTeX.
+\\Intentamos ejercitasr las opciones más importantes.
+\end{abstract}
+
+
+\tableofcontents
+
+\newpage
+
+\section{Introduccion}
+Esto es una introducción para nuestro manual 
+
+\section{Implementacion}
+
+\subsection{Pruebas iniciales}
+
+\end{document}
