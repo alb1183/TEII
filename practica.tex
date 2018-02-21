@@ -364,7 +364,7 @@ Asimismo, la fórmula que representa el rendimiento del algoritmo, viene dada po
 
 \subsection{Ordenamiento Quicksort}
 El ordenamiento rápido (quicksort en inglés) es un algoritmo creado por el científico británico en computación C. A. R. Hoare.
-El algoritmo trabaja de la siguiente forma:
+El algoritmo trabaja de la siguiente forma (se aprecia en la figura \ref{fig:QuickSortInfo}):
 
 \begin{itemize}
     \item Elegir un elemento de la lista de elementos a ordenar, al que llamaremos pivote.
@@ -372,6 +372,14 @@ El algoritmo trabaja de la siguiente forma:
     \item La lista queda separada en dos sublistas, una formada por los elementos a la izquierda del pivote, y otra por los elementos a su derecha.
     \item Repetir este proceso de forma recursiva para cada sublista mientras éstas contengan más de un elemento. Una vez terminado este proceso todos los elementos estarán ordenados.
 \end{itemize}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{graph/quick-sort-info}
+\end{center}
+\caption{Ejemplo de funcionamiento del algoritmo Quick Sort}
+\label{fig:QuickSortInfo}
+\end{figure}
 
 Como se puede suponer, la eficiencia del algoritmo depende de la posición en la que termine el pivote elegido.
 
@@ -383,5 +391,35 @@ Como se puede suponer, la eficiencia del algoritmo depende de la posición en la
 \end{itemize}
 
 No es extraño, pues, que la mayoría de optimizaciones que se aplican al algoritmo se centren en la elección del pivote.
+
+\subsection{Demostración de un caso particular}
+Supongamos que el número de elementos a ordenar es una potencia de dos, es decir, ${\displaystyle n=2^{k}}$ para algún natural ${\displaystyle k}$. Inmediatamente ${\displaystyle k=log_{2}(n)}$, donde k es el número de divisiones que realizará el algoritmo.
+
+En la primera fase del algoritmo habrá n comparaciones. En la segunda fase el algoritmo instanciará dos sublistas de tamaño aproximadamente n/2. El número total de comparaciones de estas dos sublistas es: 2(n/2) = n. En la tercera fase el algoritmo procesará 4 sublistas más, por tanto el número total de comparaciones en esta fase es 4(n/4) = n.
+
+En conclusión, el número total de comparaciones que hace el algoritmo es:
+
+$ {\displaystyle n+n+n+.....+n=kn}$, donde ${\displaystyle k=log_{2}(n)}$, por tanto el Orden de Complejidad del algoritmo en el mejor de los casos es ${\displaystyle O(nlog_{2}(n))}$.
+
+\subsection{Técnicas de elección del pivote}
+El algoritmo básico del método Quicksort consiste en tomar cualquier elemento de la lista al cual denominaremos como pivote, dependiendo de la partición en que se elija, el algoritmo será más o menos eficiente.
+\begin{itemize}
+    \item Tomar un elemento cualquiera como pivote tiene la ventaja de no requerir ningún cálculo adicional, lo cual lo hace bastante rápido. Sin embargo, esta elección «a ciegas» siempre provoca que el algoritmo tenga un orden de $O(n^2)$ para ciertas permutaciones de los elementos en la lista.
+    \item Otra opción puede ser recorrer la lista para saber de antemano qué elemento ocupará la posición central de la lista, para elegirlo como pivote. Esto puede hacerse en $O(n)$ y asegura que hasta en el peor de los casos, el algoritmo sea $O(n log(n))$. No obstante, el cálculo adicional rebaja bastante la eficiencia del algoritmo en el caso promedio.
+    \item La opción a medio camino es tomar tres elementos de la lista - por ejemplo, el primero, el segundo, y el último - y compararlos, eligiendo el valor del medio como pivote.
+\end{itemize}
+
+
+\subsection{Técnicas de reposicionamiento}
+Una idea preliminar para ubicar el pivote en su posición final sería contar la cantidad de elementos menores que él, y colocarlo un lugar más arriba, moviendo luego todos esos elementos menores que él a su izquierda, para que pueda aplicarse la recursividad.
+
+Existe, no obstante, un procedimiento mucho más efectivo. Se utilizan dos índices: i, al que llamaremos índice izquierdo, y j, al que llamaremos índice derecho. El algoritmo es el siguiente:
+\begin{itemize}
+    \item Recorrer la lista simultáneamente con i y j: por la izquierda con i (desde el primer elemento), y por la derecha con j (desde el último elemento).
+    \item Cuando lista[i] sea mayor que el pivote y lista[j] sea menor, se intercambian los elementos en esas posiciones.
+    \item Repetir esto hasta que se crucen los índices.
+    \item El punto en que se cruzan los índices es la posición adecuada para colocar el pivote, porque sabemos que a un lado los elementos son todos menores y al otro son todos mayores (o habrían sido intercambiados).
+\end{itemize}
+
 
 \end{document}
