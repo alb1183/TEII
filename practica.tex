@@ -7,11 +7,15 @@
 \usepackage[spanish]{babel}
 \usepackage[hidelinks]{hyperref}
 \usepackage{color}
+\usepackage[dvipsnames]{xcolor}
 \usepackage{kantlipsum}
 \usepackage{graphicx}
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{import}
 \usepackage{listings}
+\usepackage{amsmath}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
 
 \newcommand{\grisclaro}{\color[gray]{0.99}}
 \newcommand{\gris}{\color[gray]{0.9}}
@@ -84,8 +88,183 @@ Los algoritmos se distinguen por las siguientes características:
 	\item Uso de memoria y otros recursos computacionales. También se usa la notación $O(n)$.
 \end{itemize}
 
-\section{Implementacion}
+\newpage
 
-\subsection{Pruebas iniciales}
+\section{Algoritmos de Ordenacion}
+
+\subsection{Ordenamiento de burbuja}
+La Ordenación de burbuja (Bubble Sort en inglés) es un sencillo algoritmo de ordenamiento. Funciona revisando cada elemento de la lista que va a ser ordenada con el siguiente, intercambiándolos de posición si están en el orden equivocado. Es necesario revisar varias veces toda la lista hasta que no se necesiten más intercambios, lo cual significa que la lista está ordenada. Este algoritmo obtiene su nombre de la forma con la que suben por la lista los elementos durante los intercambios, como si fueran pequeñas "burbujas" (se puede ver un ejemplo de su funcionamiento en la figura \ref{fig:BubbleSortInfo}). También es conocido como el método del intercambio directo. Dado que solo usa comparaciones para operar elementos, se lo considera un algoritmo de comparación, siendo uno de los más sencillo de implementar.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=1\textwidth]{graph/bubble-short-info}
+\end{center}
+\caption{Ejemplo de funcionamiento del algoritmo}
+\label{fig:BubbleSortInfo}
+\end{figure}
+
+\subsubsection{Descripción}
+Una manera simple de expresar el Bubble Sort en pseudocódigo es indicado en la figura \ref{fig:BubbleSortCode}.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{graph/bubble-short-code}
+\end{center}
+\caption{Pseudocódigo del algoritmo Bubble Short}
+\label{fig:BubbleSortCode}
+\end{figure}
+
+Este algoritmo realiza el ordenamiento o reordenamiento de una lista a de n valores, en este caso de n términos numerados del 0 al n-1; consta de dos bucles anidados, uno con el índice i, que da un tamaño menor al recorrido de la burbuja en sentido inverso de 2 a n, y un segundo bucle con el índice j, con un recorrido desde 0 hasta n-i, para cada iteración del primer bucle, que indica el lugar de la burbuja.
+
+La burbuja son dos términos de la lista seguidos, j y j+1, que se comparan: si el primero es mayor que el segundo sus valores se intercambian.
+
+Esta comparación se repite en el centro de los dos bucles, dando lugar a la postre a una lista ordenada. Puede verse que el número de repeticiones solo depende de n y no del orden de los términos, esto es, si pasamos al algoritmo una lista ya ordenada, realizará todas las comparaciones exactamente igual que para una lista no ordenada. Esta es una característica de este algoritmo. Luego veremos una variante que evita este inconveniente.
+
+Para comprender el funcionamiento, veamos un ejemplo sencillo:
+
+Tenemos una lista de números que hay que ordenar:
+
+\tab ${\displaystyle a=\{55,86,48,16,82\}\,}$
+
+Podemos ver que la lista que tiene cinco términos, luego:
+
+\tab ${\displaystyle n=5\,}$
+
+El índice i hará un recorrido de 2 hasta n:
+
+\tab ${\displaystyle {\color {Sepia}{\mathit {para}}}\;{\color {Black}{\mathit {i}}}\;{\color {BlueViolet}{\mathit {\gets }}}\;{\color {Black}{\mathit {2}}}\;{\color {Sepia}{\mathit {hasta}}}\;{\color {Black}{\mathit {n}}}\;{\color {Sepia}{\mathit {hacer}}}}$
+
+que en este caso será de 2 a 5. Para cada uno de los valores de i, j tomará sucesivamente los valores de 0 hasta n-i:
+
+\tab ${\displaystyle {\color {Sepia}{\mathit {para}}}\;{\color {Black}{\mathit {j}}}\;{\color {BlueViolet}{\mathit {\gets }}}\;{\color {Black}{\mathit {0}}}\;{\color {Sepia}{\mathit {hasta}}}\;{\color {Black}{\mathit {n-i}}}\;{\color {Sepia}{\mathit {hacer}}}}$
+
+Para cada valor de j, obtenido en ese orden, se compara el valor del índice j con el siguiente:
+
+\tab ${\displaystyle {\color {Sepia}{\mathit {si}}}\;{\color {Black}a_{(j)}}\;{\color {BlueViolet}>}\;{\color {Black}a_{(j+1)}}\;{\color {Sepia}{\mathit {entonces}}}}$
+
+Si el término j es mayor que el término j+1, los valores se permutan, en caso contrario se continúa con la iteración.
+
+\begin{table}[h]
+\centering
+$\begin{array}{r||r|r|r|r|r}
+            & j =  0 & j =  1 & j =  2 & j =  3 &    \\
+      \hline
+      a_{4} &     82 &     82 &     82 & \to 82 & 86 \\
+      a_{3} &     16 &     16 & \to 16 & \to 86 & 82 \\
+      a_{2} &     48 & \to 48 & \to 86 &     16 & 16 \\
+      a_{1} & \to 86 & \to 86 &     48 &     48 & 48 \\
+      a_{0} & \to 55 &     55 &     55 &     55 & 55
+\end{array}$
+\end{table}
+
+Para el caso del ejemplo, tenemos que:
+
+\tab ${\displaystyle n=5\,}$
+
+Para la primera iteración del primer bucle:
+
+\tab ${\displaystyle i=2\,}$
+
+y j tomará los valores de 0 hasta 3:
+
+\tab ${\displaystyle {\color {Sepia}{\mathit {para}}}\;{\color {Black}{\mathit {j}}}\;{\color {BlueViolet}{\mathit {\gets }}}\;{\color {Black}{\mathit {0}}}\;{\color {Sepia}{\mathit {hasta}}}\;{\color {Black}{\mathit {3}}}\;{\color {Sepia}{\mathit {hacer}}}}$
+
+Cuando j vale 0, se comparan ${\displaystyle a_{0}\;a_{1}}$, el 55 y el 86, dado que 55 < 86, no se permuta el orden.
+
+Ahora j vale 1 y se comparan ${\displaystyle a_{1}\;a_{2}}$ el 86 y el 48. Como 86 > 48, se permutan, dando lugar a una nueva lista.
+
+Se repite el proceso hasta que j valga 3, dando lugar a una lista parcialmente ordenada. Podemos ver que el término de mayor valor está en el lugar más alto.
+
+\begin{table}[h]
+\centering
+ $\begin{array}{r||r|r|r|r}
+            & j =  0 & j =  1 & j =  2 &    \\
+      \hline
+      a_{4} &     86 &     86 &     86 & 86 \\
+      a_{3} &     82 &     82 & \to 82 & 82 \\
+      a_{2} &     16 & \to 16 & \to 55 & 55 \\
+      a_{1} & \to 48 & \to 55 &     16 & 16 \\
+      a_{0} & \to 55 &     48 &     48 & 48
+   \end{array}$
+\end{table}
+
+Ahora i vale 3, y j hará un recorrido de 0 a 2.
+
+Primero j vale 0, se comparan ${\displaystyle a_{0}\;a_{1}}$, el 55 y el 48. Como 55 > 48 se permutan dando lugar a la nueva lista.
+
+Para j = 1 se compara el 55 con el 16 y se cambian de orden.
+
+Para j = 2 se compara el 55 y el 82 y se dejan como están, finalizando el bucle con una lista mejor ordenada. Puede verse que los dos valores más altos ya ocupan su lugar. No se ha realizado ninguna comparación con el término cuarto, dado que ya se sabe que después del primer ciclo es el mayor de la lista.
+
+El algoritmo consiste en comparaciones sucesivas de dos términos consecutivos ascendiendo de abajo a arriba en cada iteración, como la ascensión de las burbujas de aire en el agua, de ahí el nombre del procedimiento. En la primera iteración el recorrido ha sido completo, en el segundo se ha dejado él último término, al tener ya el mayor de los valores, en los sucesivos sé ira dejando de realizar las últimas comparaciones, como se puede ver.
+
+\begin{table}[h]
+\centering
+ $\begin{array}{r||r|r|r}
+            & j =  0 & j =  1 &    \\
+      \hline
+      a_{4} &     86 &     86 & 86 \\
+      a_{3} &     82 &     82 & 82 \\
+      a_{2} &     55 & \to 55 & 55 \\
+      a_{1} & \to 16 & \to 48 & 48 \\
+      a_{0} & \to 48 &     16 & 16
+   \end{array}$
+\end{table}
+
+Ahora ya i vale 4 y j recorrerá los valores de 0 a 1.
+
+Cuando j vale 0, se comparan ${\displaystyle a_{0}\;a_{1}}$, esto es, el 48 y el 16. Dado que 48 es mayor que 16 se permutan los valores, dando lugar a una lista algo más ordenada que la anterior. Desde esta nueva ordenación, j pasa a valer 1, con lo que se comparan los términos a 1 a 2 ${\displaystyle a_{1}\;a_{2}}$ el 48 y el 55 que quedan en el mismo orden.
+
+En este caso la burbuja ha ascendido menos que en los casos anteriores, y la lista está ya ordenada, pero el algoritmo tendrá que completarse, realizando una última iteración.
+
+Hay que tener en cuenta que el bucle realiza un número fijo de repeticiones y para finalizar tendrán que completarse, aun en el caso extremo, de que la lista estuviera previamente ordenada.
+
+Por último i vale 5 y j solo puede vale 0, con lo que sólo se realizará una comparación de ${\displaystyle a_{0}\;a_{1}}$ el 16 y el 48, que ya están ordenados y se dejan igual.
+
+\begin{table}[h]
+\centering
+ $\begin{array}{r||r|r}
+            & j =  0 &     \\
+      \hline
+      a_{4} &     86 & 86 \\
+      a_{3} &     82 & 82 \\
+      a_{2} &     55 & 55 \\
+      a_{1} & \to 48 & 48 \\
+      a_{0} & \to 16 & 16
+   \end{array}$
+\end{table}
+
+Los bucles finalizan y también el procedimiento, dejando la lista ordenada.
+
+Una variante que finaliza en caso de que la lista esté ordenada, puede ser la siguiente: como en el ejemplo anterior, empleando un centinela ordenado, que detecta que no se ha modificado la lista en un recorrido de la burbuja, y que por tanto la lista ya está ordenada, finalizando inmediatamente.
+
+
+\subsubsection{Análisis}
+Al algoritmo de la burbuja, para ordenar un vector de n términos, tiene que realizar siempre el mismo número de comparaciones:
+
+\begin{center}
+%${\displaystyle \boxed{c(n)={\frac {n^{2}-n}{2}}}}$
+${\displaystyle c(n)={\frac {n^{2}-n}{2}}}$
+\end{center}
+
+Esto es, el número de comparaciones c(n) no depende del orden de los términos, si no del número de términos:
+
+\begin{center}
+${\displaystyle \Theta (c(n))=n^{2}\;}$
+\end{center}
+
+Por lo tanto la cota ajustada asintótica del número de comparaciones pertenece al orden de n cuadrado.
+
+El número de intercambios i(n), que hay que realizar depende del orden de los términos y podemos diferenciar, el caso mejor, si el vector está previamente ordenado, y el caso peor, si el vector está ordenado en orden inverso:
+
+\begin{center}
+${\displaystyle \Theta (i(n))= ?\;}$
+\end{center}
+
+Por lo que no se puede determinar una cota ajustada asintótica del número de intercambios, dado que éste dependerá del orden del vector en cuestión.\\
+
+Facilmente se puede demostrar que tanto el rendimiento en el caso mas desfavorable como en el óptimo es el mismo ya que se ve obligado a recorrer todo el vector (aunque el orden de los intercambios será constante).
+
+\subsection{Ordenamiento de }
 
 \end{document}
