@@ -61,7 +61,7 @@
 \end{figure}
 
 \begin{abstract}
-En este documento se va a analizar varios algoritmos de ordenación para determinar orden computacional teóricamente y experimentalmente.
+En este documento se va a analizar tres algoritmos de ordenación para determinar orden computacional teóricamente y experimentalmente.
 \end{abstract}
 
 \newpage
@@ -277,7 +277,7 @@ Facilmente se puede demostrar que tanto el rendimiento en el caso mas desfavorab
 Verificación empírica del análisis, se usará el codigo de ejemplo de la siguiente sección para analizar los tiempos en funcion del tamaño de entrada (eliminando toda funcionalidad de escritura en pantalla para agilizar el proceso).
 
 Haciendo uso de una entrada de numeros aleatorios se prueban los casos de 10, 100, 1000, 10000, 20000, 40000, 60000, 80000, 100000, 200000 y 300000 elementos.
-Tras medir los tiempos se deduce experimentalmente (se aprecia en la figura \ref{fig:bubbleSortTime})que el orden de este algoritmo en tiempo es $O(n^2)$.
+Tras medir los tiempos se deduce experimentalmente (se aprecia en la figura \ref{fig:bubbleSortTime}) que el orden de este algoritmo en tiempo es $O(n^2)$.
 
 \begin{figure}[h]
 \begin{center}
@@ -300,7 +300,7 @@ Tras medir los tiempos se deduce experimentalmente (se aprecia en la figura \ref
 El ordenamiento por selección (Selection Sort en inglés) es un algoritmo de ordenamiento que requiere ${\displaystyle (n^{2})}$ operaciones para ordenar una lista de n elementos.
 
 \subsubsection{Descripción del algoritmo}
-Este algoritmo funciona de forma muy intuitiva, en esencia hace losiguiente:
+Este algoritmo funciona de forma muy intuitiva, en esencia hace lo siguiente:
 
 \begin{itemize}
 	\item Buscar el mínimo elemento de la lista
@@ -353,31 +353,38 @@ Esto es, el número de comparaciones c(n) no depende del orden de los términos,
 
 Por lo tanto la cota ajustada asintótica del número de comparaciones pertenece al orden de n cuadrado.
 
-El número de intercambios i(n), también es fijo, téngase en cuenta que la instrucción:
-
-\begin{center}
-    intercambiar(lista[i], lista[mínimo])
-\end{center}
-
-siempre se ejecuta, aun cuando i= mínimo, lo que da lugar:
+El número de intercambios i(n), también es fijo, téngase en cuenta que la instrucción: \textbf{intercambiar(lista[i], lista[mínimo])} siempre se ejecuta, aun cuando i= mínimo, lo que da lugar:
 
 \begin{center}
     ${\displaystyle i(n)=n\;}$
 \end{center}
 
-sea cual sea el vector, y el orden de sus términos, lo que implica en todos los casos un coste lineal:
+Sea cual sea el vector, y el orden de sus términos, lo que implica en todos los casos un coste lineal:
 
 \begin{center}
     ${\displaystyle \Theta (i(n))=n\;}$
 \end{center}
 
-la cota ajustada asintótica del número de intercambios es lineal, del orden de n.
+La cota ajustada asintótica del número de intercambios es lineal, del orden de n.
 
 Asimismo, la fórmula que representa el rendimiento del algoritmo, viene dada por la función:
 
 \begin{center}
     ${\displaystyle c(n)={\frac {n^{2}+n}{2}}}$
 \end{center}
+
+\subsubsection{Estudio experimental}
+Verificación empírica del análisis, se usará el codigo de ejemplo de la siguiente sección para analizar los tiempos en funcion del tamaño de entrada (eliminando toda funcionalidad de escritura en pantalla para agilizar el proceso y usando los tamaños del algoritmo anterior).
+
+Tras medir los tiempos se deduce experimentalmente (se aprecia en la figura \ref{fig:selectionSortTime}) que el orden de este algoritmo en tiempo es $O(n^2)$, aunque es ligueramente más óptimo que el algoritmo anterior ya que aun siendo un crecimiento exponencial es menor en escala (se dice que su orden exacto es menor, esto se puede apreciar en el apartado de análisis anterior comparándolo con el del algoritmo Bubble Sort).
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{graph/selectionSortTime}
+\end{center}
+\caption{Tiempos en función del número de elementos usando el algoritmo SelectionSort}
+\label{fig:selectionSortTime}
+\end{figure}
 
 \newpage
 
@@ -413,7 +420,7 @@ Como se puede suponer, la eficiencia del algoritmo depende de la posición en la
 
 No es extraño, pues, que la mayoría de optimizaciones que se aplican al algoritmo se centren en la elección del pivote.
 
-\subsection{Demostración de un caso particular}
+\subsubsection{Demostración de un caso particular}
 Supongamos que el número de elementos a ordenar es una potencia de dos, es decir, ${\displaystyle n=2^{k}}$ para algún natural ${\displaystyle k}$. Inmediatamente ${\displaystyle k=log_{2}(n)}$, donde k es el número de divisiones que realizará el algoritmo.
 
 En la primera fase del algoritmo habrá n comparaciones. En la segunda fase el algoritmo instanciará dos sublistas de tamaño aproximadamente n/2. El número total de comparaciones de estas dos sublistas es: 2(n/2) = n. En la tercera fase el algoritmo procesará 4 sublistas más, por tanto el número total de comparaciones en esta fase es 4(n/4) = n.
@@ -422,7 +429,9 @@ En conclusión, el número total de comparaciones que hace el algoritmo es:
 
 $ {\displaystyle n+n+n+.....+n=kn}$, donde ${\displaystyle k=log_{2}(n)}$, por tanto el Orden de Complejidad del algoritmo en el mejor de los casos es ${\displaystyle O(nlog_{2}(n))}$.
 
-\subsection{Técnicas de elección del pivote}
+\bigskip
+
+\subsubsection{Técnicas de elección del pivote}
 El algoritmo básico del método Quicksort consiste en tomar cualquier elemento de la lista al cual denominaremos como pivote, dependiendo de la partición en que se elija, el algoritmo será más o menos eficiente.
 \begin{itemize}
     \item Tomar un elemento cualquiera como pivote tiene la ventaja de no requerir ningún cálculo adicional, lo cual lo hace bastante rápido. Sin embargo, esta elección «a ciegas» siempre provoca que el algoritmo tenga un orden de $O(n^2)$ para ciertas permutaciones de los elementos en la lista.
@@ -430,8 +439,9 @@ El algoritmo básico del método Quicksort consiste en tomar cualquier elemento 
     \item La opción a medio camino es tomar tres elementos de la lista - por ejemplo, el primero, el segundo, y el último - y compararlos, eligiendo el valor del medio como pivote.
 \end{itemize}
 
+\bigskip
 
-\subsection{Técnicas de reposicionamiento}
+\subsubsection{Técnicas de reposicionamiento}
 Una idea preliminar para ubicar el pivote en su posición final sería contar la cantidad de elementos menores que él, y colocarlo un lugar más arriba, moviendo luego todos esos elementos menores que él a su izquierda, para que pueda aplicarse la recursividad.
 
 Existe, no obstante, un procedimiento mucho más efectivo. Se utilizan dos índices: i, al que llamaremos índice izquierdo, y j, al que llamaremos índice derecho. El algoritmo es el siguiente:
@@ -441,6 +451,26 @@ Existe, no obstante, un procedimiento mucho más efectivo. Se utilizan dos índi
     \item Repetir esto hasta que se crucen los índices.
     \item El punto en que se cruzan los índices es la posición adecuada para colocar el pivote, porque sabemos que a un lado los elementos son todos menores y al otro son todos mayores (o habrían sido intercambiados).
 \end{itemize}
+
+\newpage
+
+\subsubsection{Estudio experimental}
+Verificación empírica del análisis, se usará el codigo de ejemplo de la siguiente sección para analizar los tiempos en funcion del tamaño de entrada (eliminando toda funcionalidad de escritura en pantalla para agilizar el proceso).
+
+Haciendo uso de una entrada de numeros aleatorios se prueban los casos de 10, 100, 1000, 10000, 20000, 40000, 60000, 80000, 100000, 200000 y 300000 elementos.
+Tras medir los tiempos se deduce experimentalmente (se aprecia en la figura \ref{fig:quicksortTime}) que el orden de este algoritmo en tiempo es casi $O(n)$ en este tamaño de problemas, para tamaño mas grandes se apreciara como la grafica tiende a un orden  $O(nlog(n))$.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{graph/quicksortTime}
+\end{center}
+\caption{Tiempos en función del número de elementos usando el algoritmo QuickSort}
+\label{fig:quicksortTime}
+\end{figure}
+
+
+\section{Conclusiones}
+Se aprecia como el mejor algoritmo de ordenacion es QuickSort, aunque este tiene la limitación de no tener un orden exacto, el promedio como se indica anteriormente es $O(nlog(n))$ pero en el peor caso asciende a un  $O(n^2)$.
 
 
 \end{document}
