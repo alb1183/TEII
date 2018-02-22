@@ -273,6 +273,20 @@ Por lo que no se puede determinar una cota ajustada asintótica del número de i
 
 Facilmente se puede demostrar que tanto el rendimiento en el caso mas desfavorable como en el óptimo es el mismo ya que se ve obligado a recorrer todo el vector (aunque el orden de los intercambios será constante).
 
+\subsubsection{Estudio experimental}
+Verificación empírica del análisis, se usará el codigo de ejemplo de la siguiente sección para analizar los tiempos en funcion del tamaño de entrada (eliminando toda funcionalidad de escritura en pantalla para agilizar el proceso).
+
+Haciendo uso de una entrada de numeros aleatorios se prueban los casos de 10, 100, 1000, 10000, 20000, 40000, 60000, 80000, 100000, 200000 y 300000 elementos.
+Tras medir los tiempos se deduce experimentalmente (se aprecia en la figura \ref{fig:bubbleSortTime})que el orden de este algoritmo en tiempo es $O(n^2)$.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{graph/bubbleSortTime}
+\end{center}
+\caption{Tiempos en función del número de elementos usando el algoritmo Bubble Short}
+\label{fig:bubbleSortTime}
+\end{figure}
+
 \subsubsection{Ejemplo en C++}
 
 \showprog{bubbleSortCode.cpp}
