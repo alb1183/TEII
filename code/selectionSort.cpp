@@ -5,11 +5,14 @@ using namespace std;
 int main() {
    int num, aux;
    int* arreglo;
+   cout << "Cuantos numeros seran: ";
    cin >> num;
    arreglo = new int[num];
    
    for(int x = 0; x < num; x++) {
+      cout << "Ingresa el numero " << x << " de la serie: ";
       cin >> arreglo[x];
+      cout << endl;
    }
 
 	int pos_min;
@@ -27,6 +30,12 @@ int main() {
 			 arreglo[pos_min] = aux;
 		}
 	}
+	
+   cout << "***NUMEROS ARREGLADOS***" << endl;
+
+   for(int w = 0; w < num; w++) {
+      cout << "Numero " << w << ".- " << arreglo[w] << endl;
+   }
 
   
    delete[] arreglo;
