@@ -1,0 +1,17 @@
+Grafica generada con R Studios:
+> elementos <- c(10, 100, 1000, 10000, 20000, 40000,60000,80000, 100000,200000,300000)
+> milisegundos <- c(15,18,19,100,357,1300,3000,5300,8363,33400,76000)
+> plot (elementos, milisegundos, type="o", col="blue")
+
+Timpos InsertionSort
+10: 0.015s
+100: 0.018s
+1000: 0.019s
+10000: 0.1s
+20000: 0.357s
+40000: 1.3s
+60000: 3s
+80000: 5.3s
+100000: 8.363s
+200000: 33.4s
+300000: 76s
