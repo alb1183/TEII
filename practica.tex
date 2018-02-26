@@ -61,7 +61,7 @@
 \end{figure}
 
 \begin{abstract}
-En este documento se va a analizar tres algoritmos de ordenación para determinar orden computacional teóricamente y experimentalmente.
+En este documento se va a analizar tres algoritmos de ordenación para determinar el orden computacional teóricamente y experimentalmente.
 \end{abstract}
 
 \newpage
@@ -71,7 +71,7 @@ En este documento se va a analizar tres algoritmos de ordenación para determina
 \newpage
 
 \section{Introducción}
-En computación y matemáticas un algoritmo de ordenamiento es un algoritmo que pone elementos de una lista o un vector en una secuencia dada por una relación de orden, es decir, el resultado de salida ha de ser una permutación —o reordenamiento— de la entrada que satisfaga la relación de orden dada. Las relaciones de orden más usadas son el orden numérico y el orden lexicográfico. Ordenamientos eficientes son importantes para optimizar el uso de otros algoritmos (como los de búsqueda y fusión) que requieren listas ordenadas para una ejecución rápida. También es útil para poner datos en forma canónica y para generar resultados legibles por humanos.
+En computación y matemáticas un algoritmo de ordenamiento es un algoritmo que pone elementos de una lista o un vector en una secuencia dada por una relación de orden, es decir, el resultado de salida ha de ser una permutación —o reordenamiento— de la entrada que satisfaga la relación de orden dada. Las relaciones de orden más usadas son el orden numérico y el orden lexicográfico. Ordenamientos eficientes son importantes para optimizar el uso de otros algoritmos (como los de búsqueda y fusión) que requieren listas ordenadas para una ejecución rápida. También es útil para poner datos en forma canónica y para generar resultados legibles por humanos. \cite{wiki:SORT}
 
 \section{Clasificación}
 Los algoritmos de ordenamiento se pueden clasificar en las siguientes maneras:
@@ -101,7 +101,7 @@ Los algoritmos se distinguen por las siguientes características:
 \section{Algoritmos de Ordenacion}
 
 \subsection{Ordenamiento de burbuja}
-La Ordenación de burbuja (Bubble Sort en inglés) es un sencillo algoritmo de ordenamiento. Funciona revisando cada elemento de la lista que va a ser ordenada con el siguiente, intercambiándolos de posición si están en el orden equivocado. Es necesario revisar varias veces toda la lista hasta que no se necesiten más intercambios, lo cual significa que la lista está ordenada. Este algoritmo obtiene su nombre de la forma con la que suben por la lista los elementos durante los intercambios, como si fueran pequeñas "burbujas" (se puede ver un ejemplo de su funcionamiento en la figura \ref{fig:BubbleSortInfo}). También es conocido como el método del intercambio directo. Dado que solo usa comparaciones para operar elementos, se lo considera un algoritmo de comparación, siendo uno de los más sencillo de implementar.
+La Ordenación de burbuja (Bubble Sort en inglés) es un sencillo algoritmo de ordenamiento. Funciona revisando cada elemento de la lista que va a ser ordenada con el siguiente, intercambiándolos de posición si están en el orden equivocado. Es necesario revisar varias veces toda la lista hasta que no se necesiten más intercambios, lo cual significa que la lista está ordenada. Este algoritmo obtiene su nombre de la forma con la que suben por la lista los elementos durante los intercambios, como si fueran pequeñas "burbujas" (se puede ver un ejemplo de su funcionamiento en la figura \ref{fig:BubbleSortInfo}). También es conocido como el método del intercambio directo. Dado que solo usa comparaciones para operar elementos, se lo considera un algoritmo de comparación, siendo uno de los más sencillo de implementar.  \cite{wiki:Burbu}
 
 \begin{figure}[h]
 \begin{center}
@@ -297,7 +297,7 @@ Tras medir los tiempos se deduce experimentalmente (se aprecia en la figura \ref
 
 \subsection{Ordenamiento por selección}
 
-El ordenamiento por selección (Selection Sort en inglés) es un algoritmo de ordenamiento que requiere ${\displaystyle (n^{2})}$ operaciones para ordenar una lista de n elementos.
+El ordenamiento por selección (Selection Sort en inglés) es un algoritmo de ordenamiento que requiere ${\displaystyle (n^{2})}$ operaciones para ordenar una lista de n elementos. La gran ventaja de este algoritmo es su simplicidad. \cite{wiki:Select}
 
 \subsubsection{Descripción del algoritmo}
 Este algoritmo funciona de forma muy intuitiva, en esencia hace lo siguiente:
@@ -478,7 +478,11 @@ Tras medir los tiempos se deduce experimentalmente (se aprecia en la figura \ref
 
 
 \section{Conclusiones}
-Se aprecia como el mejor algoritmo de ordenacion es QuickSort, aunque este tiene la limitación de no tener un orden exacto, el promedio como se indica anteriormente es $O(nlog(n))$ pero en el peor caso asciende a un  $O(n^2)$.
+Se aprecia como el mejor algoritmo de ordenacion es QuickSort, aunque este tiene la limitación de no tener un orden exacto, el promedio como se indica anteriormente es $O(nlog(n))$ pero en el peor caso asciende a un $O(n^2)$.
 
+Los dos primeros algoritmos, aunque tienen un orden $O(n^2)$ son más sencillos de explicar para un público no experto en algoritmia. Además el algoritmo QuickSort normalmente viene ya implementado en la mayoría de librerías estándar de muchos lenguajes de programación por lo que su uso suele ser fácil.
+
+\bibliographystyle{plain}
+\bibliography{referencias}
 
 \end{document}
